@@ -1,0 +1,41 @@
+import os
+
+QueueData = ['' for i in range (0,20)]
+startpointer = 0
+endpointer = 0
+
+
+def Enqueue(DataToAdd, QueueData): 
+    global endpointer
+    if(endpointer == 20): 
+        return False
+    else:
+        QueueData[endpointer] = DataToAdd 
+        endpointer = endpointer + 1
+        return True
+    
+def Readfile(QueueData, startpointer, endpointer):
+    FileName = input('Please enter the file name:')
+    if (os.path.isfile(FileName)):
+        f = open(FileName, "r")
+        Datatoinsert = (f.readline()).strip()
+        flag = Enqueue(Datatoinsert, QueueData)
+        while flag== True and Datatoinsert != None:
+            flag = Enqueue(Datatoinsert , QueueData)
+            Datatoinsert = (f.readline()).strip()
+            
+        if flag == True:
+           return 2
+        else:
+            return 1
+    else:
+        return -1
+    
+    
+returnvalue =Readfile(QueueData, startpointer, endpointer)
+if returnvalue == -1:
+    print ('file not found :')
+elif returnvalue == 2 :
+    print('All items added')
+else:
+    print('queue got full')
