@@ -19,7 +19,7 @@ def Readfile(QueueData, startpointer, endpointer):
     if (os.path.isfile(FileName)):
         f = open(FileName, "r")
         Datatoinsert = (f.readline()).strip()
-        flag = Enqueue(Datatoinsert, QueueData)
+        flag = True
         while flag== True and Datatoinsert != None:
             flag = Enqueue(Datatoinsert , QueueData)
             Datatoinsert = (f.readline()).strip()
@@ -34,7 +34,7 @@ def Readfile(QueueData, startpointer, endpointer):
     
 returnvalue =Readfile(QueueData, startpointer, endpointer)
 if returnvalue == -1:
-    print ('file not found :')
+    print ('file not found ')
 elif returnvalue == 2 :
     print('All items added')
 else:
