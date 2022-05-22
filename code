@@ -1,4 +1,4 @@
-import os
+
 
 QueueData = ['' for i in range (0,20)]
 startpointer = 0
@@ -16,11 +16,11 @@ def Enqueue(DataToAdd, QueueData):
     
 def Readfile(QueueData, startpointer, endpointer):
     FileName = input('Please enter the file name:')
-    if (os.path.isfile(FileName)):
+    try:
         f = open(FileName, "r")
         Datatoinsert = (f.readline()).strip()
-        flag = True
-        while flag== True and Datatoinsert != None:
+        flag = Enqueue(Datatoinsert, QueueData)
+        while flag== True and Datatoinsert != '':
             flag = Enqueue(Datatoinsert , QueueData)
             Datatoinsert = (f.readline()).strip()
             
@@ -28,7 +28,7 @@ def Readfile(QueueData, startpointer, endpointer):
            return 2
         else:
             return 1
-    else:
+    except FileNotFoundError:
         return -1
     
     
