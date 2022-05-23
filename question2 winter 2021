@@ -1,0 +1,62 @@
+class Picture():
+    def __init__ (self, dcription,wth,hght,framecol):
+        self.__Description = dcription
+        self.__Width = int(wth)
+        self.__Height = int(hght)
+        self.__FrameColour= framecol
+        
+    def GetDescription(self):
+        return self.__Description
+    def GetHeight (self):
+        return self.__Height
+    def GetWidth (self):
+        return self.__Width
+    def GetColour(self):
+        return self.__FrameColour
+    def SetDescription(self, newdescription):
+        self.__Description = newdescription
+        
+        
+picturearray = [Picture('',0,0,'') for i in range(0,100)]
+
+
+
+def  ReadData():
+    global picturearray
+    count = 0
+    Filename = 'Pictures.txt'
+    try :
+        f = open(Filename,'r')
+        fdescription = (f.readline()).strip()
+        while fdescription != '':
+            fwidth = (f.readline()).strip()
+            fheight = (f.readline()).strip()
+            framecolor = (f.readline()).strip()
+            picturearray[count] = Picture(fdescription,fwidth,fheight,framecolor)
+            fdescription = (f.readline()).strip()
+            count = count + 1
+        f.close()
+    
+    except FileNotFoundError():
+        print ('--> File not found!')
+    return count 
+        
+        
+Numofpics = ReadData()
+    
+usercolour = input("Input the Frame colour ").lower()
+userwidth = int(input("Input the Maximum Width "))
+userheight = int(input("Input the Maximum Height "))
+for i in range (0,Numofpics):
+    if picturearray[i].GetColour() == usercolour:
+        if  picturearray[i].GetWidth() <= userwidth:
+            if picturearray[i].GetHeight() <= userheight:
+                print (picturearray[i].GetWidth(), ' '  ,picturearray[i].GetHeight()
+                       ,' ', picturearray[i].GetDescription())
+                
+    
+        
+
+
+
+
