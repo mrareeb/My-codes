@@ -1,0 +1,51 @@
+class node:
+    def __init__(self, pointer , data):
+        self.Data = data
+        self.NextNode = pointer
+     
+linkedlist = [node(1,1), node(4,5),node(7,6),node(-1,7),node(2,2)
+              ,node(6,0),node(8,0),node(3,56),node(9,0),node(-1,0),]
+startpointer = 0
+emptylist = 5
+
+
+def outputnodes(array, startpointer):
+    
+    while startpointer != -1:
+        print (linkedlist[startpointer].Data)
+        print (linkedlist[startpointer].NextNode)
+        startpointer = linkedlist[startpointer].NextNode
+    
+
+
+def addnode(linkedlist , data):
+    global emptylist 
+    if emptylist != -1:
+        newnodep = emptylist
+        remember = linkedlist[emptylist].NextNode
+        linkedlist[emptylist].Data = data
+        linkedlist[emptylist].NextNode = -1
+        currentpointer = startpointer
+        previouspointer = 0
+        while currentpointer != -1 :
+            previouspointer = currentpointer
+            currentpointer = linkedlist[currentpointer].NextNode
+        linkedlist[previouspointer].NextNode = emptylist
+        emptylist = remember
+        return True
+    else :
+        return False
+    
+
+for i in range (0,10):
+    print(f'''{linkedlist[i].Data}  {linkedlist[i].NextNode}''')
+datatoadd =input('input data to add: ')
+addnode(linkedlist, datatoadd)
+for i in range (0,10):
+    print(f'''{linkedlist[i].Data}  {linkedlist[i].NextNode}''')
+    
+    
+    
+        
+
+        
